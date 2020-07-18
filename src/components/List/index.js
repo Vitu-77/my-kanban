@@ -1,15 +1,20 @@
 import React from 'react';
 
+import Card from '../Card';
 import { Container, Header, Title, CardsContainer } from './styles';
 
-const List = ({ children, title }) => {
+const List = ({ data }) => {
 	return (
 		<Container>
 			<Header>
-				<Title>{title}</Title>
+				<Title>{data.title}</Title>
 				<span>...</span>
 			</Header>
-			<CardsContainer>{children}</CardsContainer>
+			<CardsContainer>
+				{data.cards.map(({ id, ...data }) => (
+					<Card key={id} data={data} />
+				))}
+			</CardsContainer>
 		</Container>
 	);
 };

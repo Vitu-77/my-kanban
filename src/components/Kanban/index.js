@@ -1,49 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Header from '../Header';
 import Board from '../Board';
-import List from '../List';
-import Card from '../Card';
 
 import { Container } from './styles';
 
+import data from '../../data';
+
 const Kanban = () => {
+	const [loadingData, setLoadingData] = useState(true);
+	const [boardData, setBoardData] = useState([]);
+
+	useEffect(() => {
+		const get = () => {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve(data);
+				}, [800]);
+			});
+		};
+
+		const fetchData = async () => {
+			const data = await get();
+
+			setBoardData(data.board);
+			setLoadingData(false);
+		};
+
+		fetchData();
+	}, []);
+
 	return (
 		<Container>
 			<Header />
-			<Board>
-				<List title='List 1'>
-					<Card />
-					<Card />
-					<Card />
-				</List>
-
-				<List title='Awasome Liste'>
-					<Card />
-					<Card />
-				</List>
-				<List title='Awasome Liste'>
-					<Card />
-					<Card />
-				</List>
-				<List title='Awasome Liste'>
-					<Card />
-					<Card />
-				</List>
-				<List title='Awasome Liste'>
-					<Card />
-					<Card />
-				</List>
-
-				<List title='Syka Blyta'>
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-				</List>
-			</Board>
+			<Board loading={loadingData} data={boardData} />
 		</Container>
 	);
 };

@@ -30,7 +30,7 @@ export const Title = styled.h2`
 	color: #000;
 `;
 
-export const CardsContainer = styled.div`
+export const CardsContainer = styled.ul`
 	width: 100%;
 	height: max-content;
 	overflow-y: auto;

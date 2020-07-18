@@ -7,7 +7,12 @@ export const Container = styled.section`
 	padding: 8px;
 	background: ${({ theme }) => theme.mainColor};
 	display: flex;
-	overflow-y: hidden;	
+	overflow-y: hidden;
 	overflow-x: auto;
 	margin-top: 45px;
+`;
+
+export const Loading = styled.span`
+	color: #fff;
+	font-size: 20px;
 `;

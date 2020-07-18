@@ -2,12 +2,10 @@ import React from 'react';
 
 import { Container } from './styles';
 
-const Card = () => {
+const Card = ({ data }) => {
     return (
         <Container>
-            <h1>Card</h1>
-            <h1>Card</h1>
-            <h1>Card</h1>
+            <p>{data.title}</p>
         </Container>
     )
 }
