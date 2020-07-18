@@ -10,7 +10,7 @@ export const Container = styled.div`
 	padding: 4px;
 	max-height: 100%;
 	height: max-content;
-	width: calc(100vw / 5);
+	width: 280px;
 
 	&:last-child {
 		margin-right: 0;
@@ -34,7 +34,21 @@ export const CardsContainer = styled.ul`
 	width: 100%;
 	height: max-content;
 	overflow-y: auto;
+	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+`;
+
+export const NewCard = styled.button`
+	margin-top: 4px;
+	border-radius: 4px;
+	font-size: 15px;
+	height: 38px;
+	width: 100%;
+	cursor: pointer;
+
+	&:hover {
+		background: rgba(200, 200, 200);
+	}
 `;

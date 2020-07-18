@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.li`
     border-radius: 4px;
@@ -11,4 +11,13 @@ export const Container = styled.li`
     & > p {
         font-size: 15px;
     }
+
+    ${({ isDragging }) => isDragging && css`
+        background: #ccc;
+        cursor: grabbing;
+        
+        & > p {
+            visibility: hidden;
+        }
+    `}
 `;

@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {useDrop} from 'react-dnd';
 
 import Card from '../Card';
-import { Container, Header, Title, CardsContainer } from './styles';
+import { Container, Header, Title, CardsContainer, NewCard } from './styles';
 
-const List = ({ data }) => {
+import { ListsContext } from '../../store/Lists';
+
+const newCard = {
+	id: Math.random(),
+	title: 'Card Novinho em Folha',
+};
+
+const List = ({ data, index }) => {
+	const { handleInsetCard } = useContext(ListsContext);
+
+	const [, dropRef] = useDrop({
+		accept: 'CARD',
+		hover: (index) => {
+			console.log(index);
+		}
+	})
+
+	/** posso criar um drop area, que vai ocupar o restante da altura da lista toda, fora os cards */
+
 	return (
-		<Container>
+		<Container ref={dropRef}>
 			<Header>
-				<Title>{data.title}</Title>
+				<Title onClick={() => console.log(data)}>{data.title}</Title>
 				<span>...</span>
 			</Header>
 			<CardsContainer>
-				{data.cards.map(({ id, ...data }) => (
-					<Card key={id} data={data} />
+				{data.cards.map((card, cardIndex) => (
+					<Card key={card.id} data={card} index={cardIndex} listIndex={index} />
 				))}
 			</CardsContainer>
+			<NewCard onClick={() => handleInsetCard(index, newCard)}>Add Card</NewCard>
 		</Container>
 	);
 };
