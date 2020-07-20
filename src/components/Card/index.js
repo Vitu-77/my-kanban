@@ -18,8 +18,28 @@ const Card = ({ data, index, listIndex }) => {
 
 	const [, dropRef] = useDrop({
 		accept: 'CARD',
-		hover: (item) => {
-			if (item.index === index && item.listIndex === listIndex) {
+		hover: (item, monitor) => {
+			const draggedIndex = item.index;
+			const targetIndex = index;
+
+			const draggedListIndex = item.listIndex;
+			const targetListIndex = listIndex;
+
+			if (draggedIndex === targetIndex && draggedListIndex === targetListIndex) {
+				return;
+			}
+
+			const targetSize = cardRef.current.getBoundingClientRect();
+			const targetCenter = (targetSize.bottom - targetSize.top) / 2;
+
+			const draggedOffset = monitor.getClientOffset();
+			const draggedTop = draggedOffset.y - targetSize.top;
+
+			if (draggedIndex < targetIndex && draggedTop < targetCenter) {
+				return;
+			}
+
+			if (draggedIndex > targetIndex && draggedTop > targetCenter) {
 				return;
 			}
 
@@ -27,6 +47,8 @@ const Card = ({ data, index, listIndex }) => {
 
 			item.index = index;
 			item.listIndex = listIndex;
+
+			console.log(item);
 		},
 	});
 
