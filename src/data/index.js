@@ -7,14 +7,17 @@ const data = {
 				{
 					id: 'LA-1',
 					title: 'A nice Card',
+					tasks: []
 				},
 				{
 					id: 'LA-2',
 					title: 'Another nice Card',
+					tasks: []
 				},
 				{
 					id: 'LA-3',
 					title: 'This card have more content than the others',
+					tasks: []
 				},
 			],
 		},
@@ -25,12 +28,39 @@ const data = {
 				{
 					id: 'LB-1',
 					title: 'This is the first card of the second list',
+					label: 'red',
+					tasks: [
+						{ description: 'Some nice task', done: false },
+						{ description: 'Some nice task', done: true },
+						{ description: 'Some nice task', done: true },
+						{ description: 'Some nice task', done: false },
+						{ description: 'Some nice task', done: false },
+					],
 				},
 				{
 					id: 'LB-2',
 					title: 'I dont fucking know what to put here, so its completely random',
+					label: 'green',
+					tasks: [
+						{ description: 'Some nice task', done: false },
+						{ description: 'Some nice task', done: true },
+						{ description: 'Some nice task', done: false },
+						{ description: 'Some nice task', done: false },
+						{ description: 'Some nice task', done: false },
+					],
 				},
-				{ id: 'LB-3', title: 'Syka Blyat!!!!' },
+				{
+					id: 'LB-3',
+					title: 'Syka Blyat!!!!',
+					label: 'blue',
+					tasks: [
+						{ description: 'Some nice task', done: true },
+						{ description: 'Some nice task', done: true },
+						{ description: 'Some nice task', done: true },
+						{ description: 'Some nice task', done: true },
+						{ description: 'Some nice task', done: false },
+					],
+				},
 			],
 		},
 		// {

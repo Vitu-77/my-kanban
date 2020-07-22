@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 import List from '../List';
-import { Container, Loading } from './styles';
+import { Container, Loading, NewList } from './styles';
 
 import { ListsContext } from '../../store/Lists';
 
@@ -43,6 +43,7 @@ const Board = () => {
 			{lists.map((list, index) => (
 				<List key={list.id} data={list} index={index} />
 			))}
+			<NewList>New List</NewList>
 		</Container>
 	);
 };

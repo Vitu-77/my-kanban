@@ -11,6 +11,7 @@ const newCard = () => {
 	const card = {
 		id: uuid(),
 		title: 'Card Novinho em Folha',
+		tasks: []
 	};
 
 	return card;

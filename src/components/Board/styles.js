@@ -16,3 +16,12 @@ export const Loading = styled.span`
 	color: #fff;
 	font-size: 20px;
 `;
+
+export const NewList = styled.button`
+	width: 280px;
+	height: 36px;
+	border-radius: 4px;
+	border: 1px solid rgba(255,255,255, .1);
+	font-size: 16px;
+	cursor: pointer;
+`;

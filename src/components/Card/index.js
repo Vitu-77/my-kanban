@@ -1,7 +1,7 @@
-import React, { useRef, useContext } from 'react';
+import React, { useState, useRef, useLayoutEffect, useContext } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { Container } from './styles';
+import { Container, Progress, CardOptions } from './styles';
 
 import { ListsContext } from '../../store/Lists';
 
@@ -9,10 +9,13 @@ const Card = ({ data, index, listIndex }) => {
 	const cardRef = useRef();
 	const { handleMoveCard } = useContext(ListsContext);
 
-	const [{ isDragging }, dragRef] = useDrag({
+	const [progress, setProgress] = useState(undefined);
+
+	const [{ isDragging, opacity, scale }, dragRef] = useDrag({
 		item: { type: 'CARD', index, listIndex },
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
+			opacity: monitor.isDragging() ? .2 : 1,
 		}),
 	});
 
@@ -47,16 +50,39 @@ const Card = ({ data, index, listIndex }) => {
 
 			item.index = index;
 			item.listIndex = listIndex;
-
-			console.log(item);
 		},
 	});
+
+	useLayoutEffect(() => {
+		const cardTasks = data.tasks;
+		const totalCardTasks = cardTasks.length;
+
+		if (totalCardTasks === 0) {
+			return setProgress(null);
+		}
+
+		const doneTasks = cardTasks.filter((task) => task.done).length;
+		const progress = Math.round((doneTasks * 100) / totalCardTasks);
+
+		setProgress(progress);
+	}, [data]);
 
 	dragRef(dropRef(cardRef));
 
 	return (
-		<Container ref={cardRef} isDragging={isDragging}>
+		<Container
+			ref={cardRef}
+			label={data.label}
+			isDragging={isDragging}
+			style={{ opacity }}
+			>
+			<CardOptions></CardOptions>
 			<p>{data.title}</p>
+			{progress !== null && (
+				<Progress progress={progress}>
+					<div></div>
+				</Progress>
+			)}
 		</Container>
 	);
 };
